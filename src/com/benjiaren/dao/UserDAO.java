@@ -4,10 +4,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.benjiaren.bean.User;
 import com.benjiaren.util.DBConn;
-
+/**
+ * table = 'ofuser'
+ * @author Administrator
+ *
+ */
 public class UserDAO {
 	private Connection conn;
 	private PreparedStatement ptst;
@@ -17,15 +23,61 @@ public class UserDAO {
 		conn = DBConn.getConnect();
 		User user = new User();
 		try{
-			ptst = conn.prepareStatement("select * from user");
+			ptst = conn.prepareStatement("select username,email from ofuser where username = ?");
+			ptst.setString(1, name);
 			rs = ptst.executeQuery();
 			while(rs.next()){
-				
+				user.setName(rs.getString("username"));
+				user.setEmail(rs.getString("email"));
 			}
 		}catch (SQLException e) {
 			// TODO: handle exception
+		}finally{
+			this.close();
 		}
+		
 		return user;
 	}
 	
+	public List<User> getAllUser(){
+		conn = DBConn.getConnect();
+		List<User> list = new ArrayList<User>();
+		try{
+			ptst = conn.prepareStatement("select username,email from ofuser");
+			rs = ptst.executeQuery();
+			while(rs.next()){
+				User user = new User();
+				user.setName(rs.getString("username"));
+				user.setEmail(rs.getString("email"));
+				list.add(user);
+			}
+		}catch (SQLException e) {
+			// TODO: handle exception
+		}finally{
+			this.close();
+		}
+		
+		return list;
+		
+	}
+	
+	public void close(){
+		try{
+			if(rs != null){
+				rs.close();
+			}
+			if(ptst != null){
+				ptst.close();
+			}
+			if(conn != null){
+				conn.close();
+			}
+		}catch(final SQLException e){
+			e.printStackTrace();
+		}
+		
+	}
+	public static void main(String[] args) {
+		new UserDAO().getUserName("xiaoxu");
+	}
 }

@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "user")
+@XmlRootElement(name = "jiongshi")
 
 public class JiongShi {
 	private Date created_at;
