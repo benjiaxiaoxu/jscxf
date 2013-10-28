@@ -20,6 +20,8 @@ public class JiongShi {
 	private int attitudes_count;
 	private int mievel;
 	private List<String> pic_urls;
+	private List<Comments> comments;
+	
 	public Date getCreated_at() {
 		return created_at;
 	}
@@ -91,6 +93,12 @@ public class JiongShi {
 	}
 	public void setPic_urls(List<String> pic_urls) {
 		this.pic_urls = pic_urls;
+	}
+	public List<Comments> getComments() {
+		return comments;
+	}
+	public void setComments(List<Comments> comments) {
+		this.comments = comments;
 	}
 	
 }

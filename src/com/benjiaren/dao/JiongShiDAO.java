@@ -46,16 +46,16 @@ public class JiongShiDAO {
 				js.setComments_count(rs.getInt("comments_count"));
 				js.setAttitudes_count(rs.getInt("attitudes_count"));
 				js.setMievel(rs.getInt("mievel"));
-				String tem = rs.getString("pic_urls");
-				
-				String[] tems = tem.split(",");
-				
-				List<String> tt = new ArrayList<String>();
-				for(int i = 0 ; i < tems.length ; i++){
-					tt.add(tems[i]);
-				}
-				System.out.println(tt.size());
-				js.setPic_urls(tt);
+//				String tem = rs.getString("pic_urls");
+//				
+//				String[] tems = tem.split(",");
+//				
+//				List<String> tt = new ArrayList<String>();
+//				for(int i = 0 ; i < tems.length ; i++){
+//					tt.add(tems[i]);
+//				}
+//				System.out.println(tt.size());
+//				js.setPic_urls(tt);
 				list.add(js);
 			}
 		}catch (SQLException e) {
@@ -71,7 +71,7 @@ public class JiongShiDAO {
 		conn = DBConn.getConnect();
 		try{
 			String sql = "insert into ofjiongshi(created_at,text,username,longitude,latitude," +
-					"reposts_count,comments_count,attitudes_count,mievel,pic_urls) value(?,?,?,?,?,?,?,?,?,?)";
+					"reposts_count,comments_count,attitudes_count,mievel) value(?,?,?,?,?,?,?,?,?)";
 			ptst = conn.prepareStatement(sql);
 			ptst.setDate(1, SQLDATE.tosql(jiongshi.getCreated_at()));
 			ptst.setString(2, Null.toNull(jiongshi.getText()));
@@ -83,11 +83,12 @@ public class JiongShiDAO {
 			ptst.setInt(8,jiongshi.getAttitudes_count());
 			ptst.setInt(9, jiongshi.getMievel());
 			StringBuffer sb = new StringBuffer();
-			for(String s : jiongshi.getPic_urls()){
-				sb.append(s);
-				sb.append(",");
-			}
-			ptst.setString(10, Null.toNull(sb.toString()));
+			
+//			for(String s : jiongshi.getPic_urls()){
+//				sb.append(s);
+//				sb.append(",");
+//			}
+//			ptst.setString(10, Null.toNull(sb.toString()));
 		    ptst.executeUpdate();
 			//int a = ptst.getResultSetHoldability();
 		}catch (SQLException e) {

@@ -6,14 +6,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "jsList")
 public class JiongShiList {
-	private List<JiongShi> jsList;
+	private List<JiongShi> jiongshi;
 
-	public List<JiongShi> getJsList() {
-		return jsList;
+	public List<JiongShi> getJiongshi() {
+		return jiongshi;
 	}
 
-	public void setJsList(List<JiongShi> jsList) {
-		this.jsList = jsList;
+	public void setJiongshi(List<JiongShi> jiongshi) {
+		this.jiongshi = jiongshi;
 	}
+
+	
 	
 }

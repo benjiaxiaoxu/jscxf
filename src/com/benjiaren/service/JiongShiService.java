@@ -1,6 +1,7 @@
 package com.benjiaren.service;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -22,9 +23,16 @@ public interface JiongShiService {
 	
 	
 	@GET  
-    @Path(value = "/{jiongshi}/add")  
-	public void addJiongShi(@PathParam("jiongshi")String jiongshi);
-	
+    @Path(value = "/{jiongshiUpload}/add")  
+	public void addJiongShi(@PathParam("jiongshiUpload")String jiongshiUpload);
+	@GET  
+    @Path(value = "/add")  
+	public void addJiongShiget(@QueryParam("text")String text,@QueryParam("source")String source,
+			@QueryParam("username")String username,@QueryParam("longitude")String longitude,@QueryParam("latitude")String latitude);
+	@POST 
+    @Path(value = "/{jiongshiUpload}/add")  
+	public void addJiongShipost(@QueryParam("text")String text,@QueryParam("source")String source,
+			@QueryParam("username")String username,@QueryParam("longitude")String longitude,@QueryParam("latitude")String latitude);
 	@GET  
     @Path(value = "/search")  
 	public JiongShiList findALLJiongShi(@QueryParam("jsl")String jsl);

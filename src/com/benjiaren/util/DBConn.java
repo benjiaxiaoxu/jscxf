@@ -8,7 +8,7 @@ public class DBConn {
 	
 	public static Connection getConnect() {
 	    String driver = "com.mysql.jdbc.Driver";
-	    String url = "jdbc:mysql://127.0.0.1:3306/openfire??useUnicode=true&characterEncoding=utf8";
+	    String url = "jdbc:mysql://127.0.0.1:3306/openfire?useUnicode=true&characterEncoding=utf8";
 	    String user = "root"; 
 	    String password = "root";
 	    try {
