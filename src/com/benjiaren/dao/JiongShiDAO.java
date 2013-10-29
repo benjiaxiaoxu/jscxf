@@ -15,7 +15,7 @@ import com.benjiaren.util.Null;
 import com.benjiaren.util.SQLDATE;
 /**
  * table = ofjiongshi
- * @author Administrator
+ * @author xuzhiguang
  *
  */
 public class JiongShiDAO {
@@ -82,7 +82,6 @@ public class JiongShiDAO {
 			ptst.setInt(7, jiongshi.getComments_count());
 			ptst.setInt(8,jiongshi.getAttitudes_count());
 			ptst.setInt(9, jiongshi.getMievel());
-			StringBuffer sb = new StringBuffer();
 			
 //			for(String s : jiongshi.getPic_urls()){
 //				sb.append(s);
@@ -90,7 +89,6 @@ public class JiongShiDAO {
 //			}
 //			ptst.setString(10, Null.toNull(sb.toString()));
 		    ptst.executeUpdate();
-			//int a = ptst.getResultSetHoldability();
 		}catch (SQLException e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -98,6 +96,25 @@ public class JiongShiDAO {
 			this.close();
 		}
 	}
+	
+	public void AddAttitudes(int jiongshiid){
+		conn = DBConn.getConnect();
+		
+		try{
+			
+			String sql = "update ofjiongshi set attitudes_count = attitudes_count+1 where jsid = ?";
+			ptst = conn.prepareStatement(sql);
+			ptst.setInt(1, jiongshiid);
+			int i = ptst.executeUpdate();
+			System.out.println(i);
+			
+		}catch(SQLException e){
+			System.out.println(e.getMessage());
+		}finally {
+			this.close();
+		}
+	}
+	
 	
 	public void close(){
 		try{

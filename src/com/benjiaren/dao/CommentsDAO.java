@@ -48,7 +48,10 @@ public class CommentsDAO {
 	
 	public void insertComment(Comments comm){
 		conn = DBConn.getConnect();
+		
 		try{
+			conn.setAutoCommit(false);
+			
 			String sql = "insert into ofcomments(created_at,text,source,username,jiongshiid,reply_comment) value(?,?,?,?,?,?)";
 			
 			ptst = conn.prepareStatement(sql);
@@ -60,12 +63,26 @@ public class CommentsDAO {
 			ptst.setString(6, comm.getReply_comment());
 			ptst.executeUpdate();
 			
-		}catch(SQLException e){
+			sql = "update ofjiongshi set comments_count = comments_count+1 where jsid = ?";
+			ptst = conn.prepareStatement(sql);
+			ptst.setInt(1, comm.getJiongshiId());
+			ptst.executeUpdate();
 			
+			conn.commit();
+			conn.setAutoCommit(true);
+	
+		}catch(SQLException e){
+			try{
+				conn.rollback();
+				conn.setAutoCommit(true);
+			}catch(Exception ex){
+				
+			}
 		}finally {
 			this.close();
 		}
 	}
+	
 	
 	
 	public void close(){

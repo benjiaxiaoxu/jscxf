@@ -11,7 +11,7 @@ import com.benjiaren.bean.User;
 import com.benjiaren.util.DBConn;
 /**
  * table = 'ofuser'
- * @author Administrator
+ * @author xuzhiguang
  *
  */
 public class UserDAO {
